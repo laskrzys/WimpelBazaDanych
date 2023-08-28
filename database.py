@@ -11,6 +11,8 @@ engine = create_engine(connectionString,
 def returnOsobaTableDict():
   with engine.connect() as conn:
     result = conn.execute(text("select * from Osoba"))
+    #"select * from Osoba WHERE id = :val"
+    #val = id (3 etc)
     OsobaTableDict = []
     for row in result.all():
       OsobaTableDict.append(row._mapping)
