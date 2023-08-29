@@ -1,5 +1,5 @@
-from flask import Flask, render_template, jsonify, request
-from database import returnOsobaTableDict
+from flask import Flask, render_template, request
+from database import returnOsobaTableDict, addosobatodb
 
 app = Flask(__name__)
 
@@ -29,9 +29,11 @@ def addosoba():
   return render_template('addosoba.html')
 
 @app.route("/bosman/bosman/addosoba/add", methods=['post'])
-def addosobaAdd():
+def doneaddosoba():
   data = request.form
-  return jsonify(data)
+  print(data)
+  addosobatodb(data)
+  return render_template('doneaddosoba.html', osobadata=data)
 
 @app.route("/bosman/listaosob")
 def listaosob():

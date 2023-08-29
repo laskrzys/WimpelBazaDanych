@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Wimpel baza danych</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <style>
+      h1{
+        font-family: Robotoo;
+        font-weight: bold;
+      }
+      h2{
+        font-weight: normal;
+        font-family: Robotoo;
+      }
+      h3{
+        font-family: Robotoo;
+      }
+    </style>
+  </head>
+  <body>
+    <h1 class="text-center mt-4 mb-4">Baza danych sprzętu Wimpla</h1>
+    <h2 class="text-center mt-4 mb-4">dodano osobę</h2>
+    <h5 class="text-center">Imię: {{osobadata['Imie']}} </h5>
+    <h5 class="text-center">Nazwisko: {{osobadata['Nazwisko']}}</h5>
+    <h5 class="text-center">e-mail: {{osobadata['Email']}}</h5>
+    <h5 class="text-center">Telefon: {{osobadata['Telefon']}}</h5>
+    <h4 class="text-center mt-5 mb-4">
+      <a href="/" type="button" class="btn btn-danger">strona domowa</a>
+    </h4>
+    
+  </body>
+</html>

@@ -17,3 +17,14 @@ def returnOsobaTableDict():
     for row in result.all():
       OsobaTableDict.append(row._mapping)
     return OsobaTableDict
+
+def addosobatodb(osobadata):
+  with engine.connect() as conn:
+    query = text("INSERT INTO Osoba (Imie, Nazwisko, Email, Telefon) VALUES (:Imie, :Nazwisko, :Email, :Telefon)")
+    _Imie=osobadata['Imie']
+    _Nazwisko=osobadata['Nazwisko']
+    _Email=osobadata['Email']
+    _Telefon=osobadata['Telefon']
+
+    conn.execute(statement=query, parameters=dict(Imie=_Imie, Nazwisko=_Nazwisko, Email=_Email,         Telefon=_Telefon))
+
