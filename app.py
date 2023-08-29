@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request
-from database import returnOsobaTableDict, addosobatodb
+from database import returnOsobaTableDict, addosobatodb, droposobaindp
 
 app = Flask(__name__)
 
@@ -31,7 +31,6 @@ def addosoba():
 @app.route("/bosman/bosman/addosoba/add", methods=['post'])
 def doneaddosoba():
   data = request.form
-  print(data)
   addosobatodb(data)
   return render_template('doneaddosoba.html', osobadata=data)
 
@@ -39,6 +38,9 @@ def doneaddosoba():
 def listaosob():
   return render_template('listaosob.html', osobaTable=returnOsobaTableDict())
 
+@app.route("/bosman/deleteosoba")
+def deleteosoba():
+  return render_template('deleteosoba.html', osobaTable=returnOsobaTableDict())
 
 if __name__ == "__main__":
   app.run(host='0.0.0.0', debug=True)
