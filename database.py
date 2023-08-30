@@ -29,8 +29,8 @@ def addosobatodb(osobadata):
     conn.execute(statement=query, parameters=dict(Imie=_Imie, Nazwisko=_Nazwisko, Email=_Email,         Telefon=_Telefon))
 
 def droposobaindp(idosoba):
-  with engine.cnnecit() as conn:
+  with engine.connect() as conn:
     query = text("DELETE FROM Osoba WHERE idOsoba = :idosoba")
-    _idosoba = idosoba
+    _idosoba = idosoba['Id']
     print(idosoba)
     conn.execute(statement=query, parameters=dict(idosoba=_idosoba))

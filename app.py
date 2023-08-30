@@ -41,6 +41,12 @@ def listaosob():
 @app.route("/bosman/deleteosoba")
 def deleteosoba():
   return render_template('deleteosoba.html', osobaTable=returnOsobaTableDict())
+  
+@app.route("/bosman/deleteosoba/delete", methods=['post'])
+def donedeletosoba():
+  idOsoba = request.form
+  droposobaindp(idOsoba)
+  return render_template('donedeleteosoba.html', osobadata=idOsoba)
 
 if __name__ == "__main__":
   app.run(host='0.0.0.0', debug=True)
