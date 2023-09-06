@@ -21,41 +21,32 @@
   </head>
   <body>
     <h1 class="text-center mt-4 mb-4">Baza danych sprzętu Wimpla</h1>
-    <h2 class="text-center mt-4 mb-4">dodaj osobę</h2>
-    <h3 class="text-center mt-4 mb-4">
+    <h2 class="text-center mt-4 mb-4">raport: Ile napraw wykonał dany człowiek w określonym czasie?     </h2>
+    <h3 class="text-center">
+      lista osób:
       <div>
-        {% include 'formaddosoba.html' %}
-      </div>
-    </h3>
+        {% for osoba in osobaTable%}<br>
+          {{osoba['Imie']}}
+          {{osoba['Nazwisko']}}
+          id: {{osoba['idOsoba']}}
+        {% endfor %}
+      </div><br><br>
+      <form action="bosman/raport1/raport" method="post">
+        <div>
+          <label>data naprawy (od)</label><br>
+          <input type="date" name="dataod" placeholder="2017-06-01">
+        </div>
+        <div>
+          <label>idosoby</label><br>
+          <input type="text" name="idosoby" placeholder="1">
+        </div>
+        <div class="mt-4">
+          <input type="submit">
+        </div>
+      </form>
+    </h3> 
     <h4 class="text-center mt-5 mb-4">
       <a href="/bosman" type="button" class="btn btn-danger">wróć</a>
     </h4>
-    <!---
-  <form action="bosman/deleteosoba/delete" method="post">
-  <div>
-    <label>Imię</label><br>
-    <input type="text" name="Imie" placeholder="Jan">
-  </div>
-
-  <div>
-    <label>Nazwisko</label><br>
-    <input type="text" name="Nazwisko" placeholder="Kowalski">
-  </div>
-
-  <div>
-    <label>e-mail</label><br>
-    <input type="text" name="Email" placeholder="jan.kowalski@pw.edu.pl">
-  </div>
-
-  <div>
-    <label>Telefon</label><br>
-    <input type="text" name="Telefon" placeholder="123456789">
-  </div>
-
-  <div class="mt-4">
-    <input type="submit">
-  </div>
-</form>
-    -->
   </body>
 </html>
