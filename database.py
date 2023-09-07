@@ -79,19 +79,23 @@ def raport2indb(data):
     return results_as_dict
 
 
-def raport3indb(data):
+def raport3p1indb():
   with engine.connect() as conn:
-    query1 = text("""
-CREATE TEMP VIEW IF NOT EXISTS OstatnieZepsucie AS SELECT Przedmiot.nazwa, Przedmiot.idstanica, MAX(Uszkodzenie.datazepsucia) as ostatniTest FROM Przedmiot RIGHT JOIN Uszkodzenie USING(idprzedmiot) WHERE Przedmiot.stan = 'smiec' GROUP BY Przedmiot.idprzedmiot
+    query = text("""
+CREATE OR REPLACE VIEW OstatnieZepsucie AS SELECT Przedmiot.Nazwa, Przedmiot.Stan, Przedmiot.idStanica, MAX(Uszkodzenie.DataZepsucia) as ostatniTest FROM Przedmiot JOIN Uszkodzenie USING(idPrzedmiot)	WHERE Przedmiot.Stan = 'smiec' GROUP BY Przedmiot.idPrzedmiot
  """)
-    query2 = ("""
-    SELECT COUNT(nazwa) as ileUsunieto FROM OstatnieZepsucie WHERE idstanica = :idStanicy AND ostatniTest >= :dataOd;
+    conn.execute(query)
+
+
+def raport3p2indb(data):
+  with engine.connect() as conn:
+    query = text("""
+    SELECT COUNT(*) as liczbaSmieci FROM OstatnieZepsucie WHERE ostatniTest >= :DataOd AND idStanica = :IDStanicy 
     """)
     _idstanicy = data['idstanicy']
     _dataod = data['dataod']
-    conn.execute(query1)
-    result = conn.execute(statement=query2,
-                          parameters=dict(idStanicy=_idstanicy,
-                                          dataOd=_dataod))
+    result = conn.execute(statement=query,
+                          parameters=dict(IDStanicy=_idstanicy,
+                                          DataOd=_dataod))
     results_as_dict = result.mappings().all()
     return results_as_dict

@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request
-from database import returnOsobaTableDict, addosobatodb, droposobaindp, raport1indb, raport2indb, raport3indb, returnStanicaTableDict
+from database import returnOsobaTableDict, addosobatodb, droposobaindp, raport1indb, raport2indb, raport3p1indb, raport3p2indb, returnStanicaTableDict
 
 app = Flask(__name__)
 
@@ -79,6 +79,7 @@ def raport2raport():
   result2 = result[0]
   return render_template('raport2raport.html', result=result2)
 
+
 @app.route("/bosman/raport3")
 def raport3():
   return render_template('raport3.html', stanicaTable=returnStanicaTableDict())
@@ -86,10 +87,10 @@ def raport3():
 
 @app.route("/bosman/bosman/raport3/raport", methods=['post'])
 def raport3raport():
+  raport3p1indb()
   data = request.form
-  result = raport3indb(data)
+  result = raport3p2indb(data)
   result2 = result[0]
-  print(result)
   return render_template('raport3raport.html', result=result2)
 
 
